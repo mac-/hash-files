@@ -1,0 +1,58 @@
+{
+	"name": "hash-dir-contents",
+	"description": "A simple function for computing the hash of the contents of an entire directory",
+	"contributors": [
+		"Mac Angell <mac.ang311@gmail.com>"
+	],
+	"version": "0.0.1",
+	"dependencies": {
+		"glob": "3.x.x",
+		"sha1": "1.x.x",
+		"MD5": "1.x.x",
+		"read-files": "0.x.x",
+		"underscore": "1.x.x"
+	},
+	"devDependencies": {
+		"mocha": "1.x.x",
+		"jshint": "2.x.x",
+		"travis-cov": "0.x.x",
+		"blanket": "1.x.x",
+		"rewire": "2.x.x",
+		"coveralls": "2.x.x",
+		"mocha-lcov-reporter": "0.x.x",
+		"rewire": "2.x.x"
+	},
+	"keywords": [
+		"glob",
+		"hash",
+		"sha1",
+		"md5",
+		"directory",
+		"contents",
+		"recursive",
+		"version",
+		"versioning"
+	],
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"main": "./lib/hash.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mac-/hash-dir-contents"
+	},
+	"scripts": {
+		"test": "make test && make test-cov && make test-lcov | ./node_modules/coveralls/bin/coveralls.js"
+	},
+	"config": {
+		"blanket": {
+			"pattern": "//^((?!\/node_modules\/)(?!\/test\/).)*$/ig",
+			"onlyCwd": true,
+			"data-cover-flags": {
+				"branchTracking": true
+			}
+		},
+		"travis-cov": { "threshold": 100 }
+	},
+	"license": "MIT"
+}
