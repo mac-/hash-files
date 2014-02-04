@@ -1,16 +1,17 @@
 {
-	"name": "hash-dir-contents",
-	"description": "A simple function for computing the hash of the contents of an entire directory",
+	"name": "hash-files",
+	"description": "A simple function for computing the hash of the contents of one or more files",
 	"contributors": [
 		"Mac Angell <mac.ang311@gmail.com>"
 	],
-	"version": "0.0.2",
+	"version": "0.0.1",
 	"dependencies": {
 		"glob": "3.x.x",
 		"sha1": "1.x.x",
 		"MD5": "1.x.x",
 		"read-files": "0.x.x",
-		"underscore": "1.x.x"
+		"underscore": "1.x.x",
+		"async": "0.x.x"
 	},
 	"devDependencies": {
 		"mocha": "1.x.x",
@@ -27,6 +28,7 @@
 		"hash",
 		"sha1",
 		"md5",
+		"files",
 		"directory",
 		"contents",
 		"recursive",
@@ -39,7 +41,7 @@
 	"main": "./lib/hash.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mac-/hash-dir-contents"
+		"url": "https://github.com/mac-/hash-files"
 	},
 	"scripts": {
 		"test": "make test && make test-cov && make test-lcov | ./node_modules/coveralls/bin/coveralls.js"

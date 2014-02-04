@@ -4,7 +4,7 @@ var assert = require('assert'),
 	_ = require('underscore'),
 	sha1 = require('sha1'),
 	md5 = require('MD5'),
-	hashDirContents = rewire('../lib/hash'),
+	hashFiles = rewire('../lib/hash'),
 	mockFiles = {
 		'a/directory/': null,
 		'z_file1.txt': 'some content',
@@ -17,14 +17,17 @@ var assert = require('assert'),
 	failReadFiles = false;
 
 
-hashDirContents.__set__('glob', function(dir, options, cb) {
+hashFiles.__set__('glob', function(dir, options, cb) {
 	if (failGlobbing) {
 		return cb(new Error());
 	}
-	cb(null, _.keys(mockFiles));
+	// add a duplicate file for testing purposes (to make sure it gets removed)
+	var files = _.keys(mockFiles);
+	files.push(files[1]);
+	cb(null, files);
 });
 
-hashDirContents.__set__('fs', {
+hashFiles.__set__('fs', {
 	readFiles: function(files, cb) {
 		if (failReadFiles) {
 			return cb(new Error());
@@ -45,7 +48,7 @@ describe('hash-dir-contents Unit Tests', function() {
 	});
 
 	it('should hash contents of directory with defaults', function(done) {
-		hashDirContents(function(err, hash) {
+		hashFiles(function(err, hash) {
 			assert(!err);
 			assert(hash === expectedContentsSha1);
 			done();
@@ -53,7 +56,7 @@ describe('hash-dir-contents Unit Tests', function() {
 	});
 
 	it('should hash contents of directory with options set', function(done) {
-		hashDirContents({ directory: '/some/root', algorithm: 'md5' }, function(err, hash) {
+		hashFiles({ files: ['/some/root/*'], algorithm: 'md5' }, function(err, hash) {
 			assert(!err);
 			assert(hash === expectedContentsMd5);
 			done();
@@ -61,14 +64,14 @@ describe('hash-dir-contents Unit Tests', function() {
 	});
 
 	it('should throw an error if params are missing', function(done) {
-		assert.throws(hashDirContents, /Missing or invalid/);
+		assert.throws(hashFiles, /Missing or invalid/);
 		done();
 	});
 
 	it('should throw an error if unknown algorithm', function(done) {
 		assert.throws(function() {
-			hashDirContents({ algorithm: 'fnord' }, function(err, hash) {});
-		}, /Inavlid algorithm/);
+			hashFiles({ algorithm: 'fnord' }, function(err, hash) {});
+		}, /Invalid algorithm/);
 		done();
 	});
 
@@ -76,7 +79,7 @@ describe('hash-dir-contents Unit Tests', function() {
 
 		failGlobbing = true;
 
-		hashDirContents(function(err, hash) {
+		hashFiles(function(err, hash) {
 			assert(err);
 			assert(!hash);
 			done();
@@ -87,7 +90,7 @@ describe('hash-dir-contents Unit Tests', function() {
 
 		failReadFiles = true;
 
-		hashDirContents(function(err, hash) {
+		hashFiles(function(err, hash) {
 			assert(err);
 			assert(!hash);
 			done();
