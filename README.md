@@ -30,15 +30,16 @@ and `callback` is a function that will be passed an error object as the first pa
 
 ## Examples
 
-	var hasher = require('hash-files');
+```js
+var hasher = require('hash-files');
 
-	hasher({
-		files: ['/home/me/stuff', [/some/other/file.txt'],
-		algorithm: 'md5'
-	}, function(error, hash) {
-		console.log(hash); // example: '843d5af0230cb6ddcd767e9d92f7e152'
-	});
-
+hasher({
+	files: ['/home/me/stuff', '/some/other/file.txt'],
+	algorithm: 'md5'
+}, function(error, hash) {
+	console.log(hash); // example: '843d5af0230cb6ddcd767e9d92f7e152'
+});
+```
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mac-/hash-files/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
