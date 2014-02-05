@@ -183,7 +183,7 @@ describe('hash-files Unit Tests', function() {
 			done();
 		});
 
-		it('should return error if readFiles fails', function(done) {
+		it('should throw an error if readFiles fails', function(done) {
 
 			failReadFile = true;
 
