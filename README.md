@@ -16,20 +16,6 @@ A simple function for computing the hash of the contents of a set of files.
 
 ## Usage
 
-This module exports a function that has the following signature:
-
-	function([options], callback)
-
-where `options` is an object that can contain the following properties:
-
-* `files` - (optional) A collection of file paths to hash the contents of. Defaults to `['./**']` (all the files in the current working directory)
-* `algorithm` - (optional) The algorithm to use to hash the content, "sha1" or "md5". Defaults to "sha1".
-
-and `callback` is a function that will be passed an error object as the first parameter and the hash as the second parameter.
-
-
-## Usage
-
 ```js
 var hashFiles = require('hash-files');
 
