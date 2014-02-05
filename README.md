@@ -28,17 +28,52 @@ where `options` is an object that can contain the following properties:
 and `callback` is a function that will be passed an error object as the first parameter and the hash as the second parameter.
 
 
-## Examples
+## Usage
 
-	var hasher = require('hash-files');
+```js
+var hashFiles = require('hash-files');
 
-	hasher({
-		files: ['/home/me/stuff', [/some/other/file.txt'],
-		algorithm: 'md5'
-	}, function(error, hash) {
-		console.log(hash); // example: '843d5af0230cb6ddcd767e9d92f7e152'
-	});
+// options is optional
+hashFiles(options, function(error, hash) {
+	// hash will be a string if no error occurred
+});
+```
 
+### hashFiles([options], callback)
+
+Performs a hash of the contents of the given files ansynchronously.
+
+* `options` - (Object) see below for more details
+* `callback` - (Function) called when an error occurs or the hash is completed. Should expect the following arguments:
+	* `error` - (Error or null) the error the occurred while hashing the contents of the given files or null if there was no error
+	* `hash` - (String) the value of the computed hash
+
+### hashFiles.sync([options])
+
+Performs a hash of the contents of the given files synchronously.
+
+* `options` - (Object) see below for more details
+* returns `hash` - (String) the value of the computed hash
+
+### Options
+
+* `files` - (optional) A collection of file paths to hash the contents of. Defaults to `['./**']` (all the files in the current working directory)
+* `algorithm` - (optional) The algorithm to use to hash the content, "sha1" or "md5". Defaults to "sha1".
+* `noGlob` - (optional) Don't bother running a glob function on the files. Use this if you know all of the files in the collection are exact paths. Setting this to `true` speeds up the call slightly.
+* `encoding` - (optional) The encoding to use when reading the contents of each file. Defaults to "utf8".
+* `batchCount` - (optional) Only used for the ansyc function. The maximum number of files to read into memory at any given time. Defaults to 100.
+
+
+
+## License
+
+The MIT License (MIT) Copyright (c) 2013 Mac Angell
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mac-/hash-files/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
