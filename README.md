@@ -44,11 +44,9 @@ Performs a hash of the contents of the given files synchronously.
 ### Options
 
 * `files` - (optional) A collection of file paths to hash the contents of. Defaults to `['./**']` (all the files in the current working directory)
-* `algorithm` - (optional) The algorithm to use to hash the content, "sha1" or "md5". Defaults to "sha1".
+* `algorithm` - (optional) The algorithm to use to hash the content: 'md5', 'sha', 'sha1', 'sha224', 'sha256', 'sha384', or 'sha512'. Defaults to 'sha1'.
 * `noGlob` - (optional) Don't bother running a glob function on the files. Use this if you know all of the files in the collection are exact paths. Setting this to `true` speeds up the call slightly.
-* `encoding` - (optional) The encoding to use when reading the contents of each file. Defaults to "utf8".
 * `batchCount` - (optional) Only used for the ansyc function. The maximum number of files to read into memory at any given time. Defaults to 100.
-
 
 
 ## License
@@ -60,6 +58,4 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mac-/hash-files/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
