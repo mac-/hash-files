@@ -25,6 +25,28 @@ hashFiles(options, function(error, hash) {
 });
 ```
 
+Or on the command line:
+
+```shell
+$ ./bin/hash-files -h
+
+  Usage: hash-files [options]
+
+  Options:
+
+    -h, --help                  output usage information
+    -V, --version               output the version number
+    -f, --files [array]         (Optional) A collection of file paths to hash the contents of. Defaults to: ./**
+    -a, --algorithm [string]    (Optional) The algorithm to use to hash the content. Defaults to: "sha1"
+    -n, --no-glob               (Optional) Use this if you know all of the files in the collection are exact paths. Setting this to true speeds up the call slightly. Defaults to: false
+    -c, --batch-count [number]  (Optional) The maximum number of files to read into memory at any given time. Defaults to: 100
+```
+
+```shell
+$ ./bin/hash-files -f '["package.json"]' -a sha256
+a29089cc5e3f8bf6ae15ea6b9cd5eaefb14bbb12e3baa2c56ee5c21422250c75
+```
+
 ### hashFiles([options], callback)
 
 Performs a hash of the contents of the given files ansynchronously.
