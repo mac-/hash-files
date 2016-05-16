@@ -4,10 +4,10 @@
   "contributors": [
     "Mac Angell <mac.ang311@gmail.com>"
   ],
-  "version": "1.1.0",
+  "version": "1.1.1",
   "dependencies": {
     "async": "^1.5.2",
-    "glob": "^7.0.3",
+    "glob-all": "^3.0.3",
     "opter": "^1.1.0",
     "read-files": "^0.1.0",
     "underscore": "^1.8.3"
