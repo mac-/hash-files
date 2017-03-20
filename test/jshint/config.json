@@ -27,7 +27,7 @@
 	"boss": true,
 	"debug": false,
 	"eqnull": true,
-	"esnext": false,
+	"esnext": true,
 	"evil": false,
 	"expr": false,
 	"funcscope": false,
@@ -46,4 +46,4 @@
 	"validthis": false,
 
 	"node": true
-}
+	}

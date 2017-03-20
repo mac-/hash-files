@@ -205,4 +205,88 @@ describe('hash-files Unit Tests', function() {
 		
 	});
 
+	/*
+	888                        888              .d888 d8b 888                                                                  d8b                  
+	888                        888             d88P"  Y8P 888                                                                  Y8P                  
+	888                        888             888        888                                                                                       
+	88888b.   8888b.  .d8888b  88888b.         888888 888 888  .d88b.  .d8888b         88888b.  888d888  .d88b.  88888b.d88b.  888 .d8888b   .d88b. 
+	888 "88b     "88b 88K      888 "88b        888    888 888 d8P  Y8b 88K             888 "88b 888P"   d88""88b 888 "888 "88b 888 88K      d8P  Y8b
+	888  888 .d888888 "Y8888b. 888  888 888888 888    888 888 88888888 "Y8888b. 888888 888  888 888     888  888 888  888  888 888 "Y8888b. 88888888
+	888  888 888  888      X88 888  888        888    888 888 Y8b.          X88        888 d88P 888     Y88..88P 888  888  888 888      X88 Y8b.    
+	888  888 "Y888888  88888P' 888  888        888    888 888  "Y8888   88888P'        88888P"  888      "Y88P"  888  888  888 888  88888P'  "Y8888 
+                                                                                     888                                                          
+                                                                                     888                                                          
+                                                                                  	 888                                                          
+	*/
+	describe('hash-files-promise', function() {
+
+		it('should return a promise that resolves to hash contents of directory with defaults', function(done) {
+			var hash = hashFiles.promise();
+			hash.then(function(hash) {
+				assert(hash === expectedContentsSha1);
+				done();
+			})
+		});
+
+		it('should return a promise that resolves to hash contents of files with md5 algorithm', function(done) {
+			var hash = hashFiles.promise({ files: ['/some/root/*'], algorithm: 'md5' });
+			hash.then(function(hash) {
+				assert(hash === expectedContentsMd5);
+				done();
+			});
+		});
+
+		it('should return a promise that resolves to hash contents of files without globbing', function(done) {
+			var hash = hashFiles.promise({ files: ['z_file1.txt', 'some/dir/file2.txt'], noGlob: true });
+			hash.then(function(hash) {
+				assert(hash === expectedContentsSha1);
+				done();
+			});
+		});
+
+		it('should reject proimse if unknown algorithm', function(done) {
+			// throw new Error
+			var hash = hashFiles.promise({ algorithm: 'fnord' });
+			hash.catch(function(err) {
+				assert.throws(function(err) {
+					throw new Error;
+				});
+			});
+			done();
+		});
+
+		it('should reject promise if globbing fails', function(done) {
+
+			failGlobbing = true;
+
+			var hash = hashFiles.promise();
+			hash.catch(function(err) {
+				assert.throws(function(err) {
+					throw new Err;
+				});
+			});
+			done();
+		});
+
+		it('should reject promise if readFiles fails', function(done) {
+
+			failReadFile = true;
+
+			var hash = hashFiles.promise();
+			hash.catch(function(err) {
+				assert.throws(function(err) {
+					throw new Err;
+				});
+			});
+			done();
+		});
+
+		it('should throw an error if more than one parameter is entered', function(done) {
+			assert.throws(function() {
+				hashFiles.promise({ files: ['/some/root/*'] }, 1)
+			});
+			done();
+		});
+	});
+
 });

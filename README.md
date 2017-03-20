@@ -49,7 +49,7 @@ a29089cc5e3f8bf6ae15ea6b9cd5eaefb14bbb12e3baa2c56ee5c21422250c75
 
 ### hashFiles([options], callback)
 
-Performs a hash of the contents of the given files ansynchronously.
+Performs a hash of the contents of the given files asynchronously.
 
 * `options` - (Object) see below for more details
 * `callback` - (Function) called when an error occurs or the hash is completed. Should expect the following arguments:
@@ -62,6 +62,13 @@ Performs a hash of the contents of the given files synchronously.
 
 * `options` - (Object) see below for more details
 * returns `hash` - (String) the value of the computed hash
+
+### hashFiles.promise([options])
+
+Performs a hash of the contents of the given files asynchronously and returns a promise.
+
+* `options` - (Object) see below for more details
+* returns `Promise` - (Promise) resolves to the value of the computed hash, or rejects if an error occurred
 
 ### Options
 
